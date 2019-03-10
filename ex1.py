@@ -20,15 +20,16 @@ def drawPoint(x,y,color):
 
 
 def bresenhamLine(x1,y1,x2,y2,color):
-    print(x1,y1,"  ",x2,y2)
     if(x1 > x2):
         x1,x2 = x2,x1
         y1,y2 = y2,y1
     dx = (float) (x2 - x1)
     dy = (float) (y2 - y1)
+    print(x1,y1,"  ",x2,y2,"  ",dx,dy,abs(dy)/abs(dx))
     dy_sign = 1 if dy >= 0 else -1
-    e = -dx
-    if abs(dy)/abs(dx) > 0.5:
+    dy = abs(dy)
+    if abs(dy) > 0.5*abs(dx):
+        e = -dx
         for i in range(0,(int)(abs(dy))):
             drawPoint(x1,y1,color)
             y1 += dy_sign
@@ -37,6 +38,7 @@ def bresenhamLine(x1,y1,x2,y2,color):
                 x1 += 1
                 e = e - 2*dy
     else:
+        e = -dy
         for i in range(0,(int)(abs(dx))):
             drawPoint(x1,y1,color)
             x1 += 1
